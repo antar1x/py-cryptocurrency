@@ -24,3 +24,15 @@ def test_do_nothing_up(mock_prediction: Mock) -> None:
 def test_do_nothing_down(mock_prediction: Mock) -> None:
     result = cryptocurrency_action(100)
     assert result == "Do nothing"
+
+
+@patch("app.main.get_exchange_rate_prediction", return_value=105)
+def test_exactly_plus_5_percent(mock_prediction: Mock) -> None:
+    result = cryptocurrency_action(100)
+    assert result == "Do nothing"
+
+
+@patch("app.main.get_exchange_rate_prediction", return_value=95)
+def test_exactly_minus_5_percent(mock_prediction: Mock) -> None:
+    result = cryptocurrency_action(100)
+    assert result == "Do nothing"
